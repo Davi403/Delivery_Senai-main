@@ -1,20 +1,23 @@
-
-import './App.css'
-
+import { useEffect, useState } from 'react';
 function App() {
-  const bancoDeDados = [
-  { id: 1, nome: "X-Bacon Duplo", descricao: "Duas carnes e muito bacon.", preco: 35.00 },
-  { id: 2, nome: "Pizza Calabresa", descricao: "Tamanho Média 8 pedaços.", preco: 45.00 },
-  { id: 3, nome: "Suco de Laranja", descricao: "Copo 500ml natural.", preco: 8.00 },
-  { id: 4, nome: "Pudim Caseiro", descricao: "Fatia caprichada com calda extra.", preco: 12.00 }
-];
-
+  const [cardapio, setCardapio] = useState([]);
+  useEffect (() => {
+console.log("Conectando ao servidor...");
+  setTimeout(() => {
+    setCardapio([
+      { id: 101, nome: "Combo Master", descricao: "Dois lanches + refri 2L", preco: 65.00 },
+      { id: 102, nome: "Hambúrguer de Grão de Bico", descricao: "Opção Vegana", preco: 28.00 },
+      { id: 103, nome: "Açaí na Tigela", descricao: "500ml com morango e leite condensado", preco: 18.00 }
+    ]);
+  }, 2000); 
+  }, []);
   return (
 <div>
-      {bancoDeDados.map((item) => (
+  {cardapio.legth === 0 ? <h2>🔄 Carregando restaurante...</h2>  : 
+      cardapio.map((item) => (
         <div key={item.id}>
           <h3>{item.nome}</h3>
-          <p>{item.id}</p>
+          <p>{item.descricao}</p>
           <p>{item.preco}</p>
         </div>
       ))}
